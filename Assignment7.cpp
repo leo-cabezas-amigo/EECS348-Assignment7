@@ -85,7 +85,7 @@ class SQLPractice {
         sql::Statement* stmt;               // To execute an SQL statement. 
 
         void connectSQL(){
-            this->stmt driver = sql::mysql::get_mysql_driver_instance();
+            this->driver = sql::mysql::get_mysql_driver_instance();
             this->con = driver->connect(this->ip, this->username, this->password);
             this->stmt = con->createStatement();
             
