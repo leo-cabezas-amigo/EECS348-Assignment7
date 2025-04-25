@@ -49,10 +49,7 @@ class SQLPractice {
             con = driver->connect(this->ip, this->username, this->password);
             stmt = con->createStatement();
             
-            res = stmt->execute("USE " + this->username + ";");
-            printMatches(res);
-            std::cout << "\n";
-
+            stmt->execute("USE " + this->username + ";");
             res = stmt->execute("SELECT * FROM Student;");
             printMatches(res);
             std::cout << "\n";
