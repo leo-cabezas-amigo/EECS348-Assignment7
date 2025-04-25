@@ -212,6 +212,24 @@ class SQLPractice {
             printMatches(res);
             std::cout << "\n";
             return;
+        }
+
+        void executeQuery9() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT s.StdFirstName, s.StdLastName, o.CourseNo, o.OffTerm, o.OffYear
+                FROM Student s
+                JOIN Enrollment e ON s.StdNo = e.StdNo
+                JOIN Offering o ON e.OfferNo = o.OfferNo
+                WHERE o.OffYear > 2019;
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
         }  
 
         
