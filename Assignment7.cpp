@@ -59,7 +59,7 @@ class SQLPractice {
             return;
         }
 
-        void printMatches(sql::ResultSet& res){
+        void printMatches(sql::ResultSet* res){
             sql::ResultSetMetaData* metadata = res->getMetaData();
             int num_cols = metadata->getColumnCount();
 
