@@ -186,9 +186,26 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT MAX(StdGPA) AS SecondHighestGPA
+                SELECT MAX(StdGPA) AS 2ndHighestGPA
                 FROM Student
                 WHERE StdGPA < (SELECT MAX(StdGPA) FROM Student);
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery8() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT s.StdFirstName, s.StdLastName
+                FROM Student s
+                JOIN Faculty f ON s.StdNo = f.FacNo
+                WHERE f.FacRank = 'ASST' AND s.StdGPA > 3.5;
             )";
             
             res = this->stmt->executeQuery(query);
@@ -278,6 +295,14 @@ void executeAllQueries(){
     std::cout << "======>  Retrieve the second-highest GPA among students. \n";
     std::cout << "\n";
     sql.executeQuery7();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 8 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======>  Find the names of students who are also teaching assistants but have a GPA above 3.5. \n";
+    std::cout << "\n";
+    sql.executeQuery8();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
