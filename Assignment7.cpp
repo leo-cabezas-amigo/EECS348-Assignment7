@@ -223,7 +223,7 @@ class SQLPractice {
                 FROM Student s
                 JOIN Enrollment e ON s.StdNo = e.StdNo
                 JOIN Offering o ON e.OfferNo = o.OfferNo
-                WHERE o.OffYear > 2019
+                WHERE o.OffYear > 2022
                 ORDER BY s.StdNo;
             )";
             
@@ -233,6 +233,22 @@ class SQLPractice {
             return;
         }  
 
+        void executeQuery10() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT FacFirstName, FacLastName, FacSalary
+                FROM Faculty
+                ORDER BY FacSalary DESC
+                LIMIT 3;
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }  
         
     private:
         std::string ip;
@@ -295,7 +311,7 @@ void executeAllQueries(){
 
     std::cout << "=============================================================== SQL QUERY 5 ===============================================================\n";
     std::cout << "\n";
-    std::cout << "======>  Find the course names and IDs of courses that have 'Data' in their title and are taught by 'Dr. Johnson'. \n";
+    std::cout << "======> Find the course names and IDs of courses that have 'Data' in their title and are taught by 'Dr. Johnson'. \n";
     std::cout << "\n";
     sql.executeQuery5();
     std::cout << "===========================================================================================================================================\n";
@@ -303,7 +319,7 @@ void executeAllQueries(){
 
     std::cout << "=============================================================== SQL QUERY 6 ===============================================================\n";
     std::cout << "\n";
-    std::cout << "======>  Display the students who have not enrolled in any courses in the past two semesters. \n";
+    std::cout << "======> Display the students who have not enrolled in any courses in the past two semesters. \n";
     std::cout << "\n";
     sql.executeQuery6();
     std::cout << "===========================================================================================================================================\n";
@@ -311,7 +327,7 @@ void executeAllQueries(){
 
     std::cout << "=============================================================== SQL QUERY 7 ===============================================================\n";
     std::cout << "\n";
-    std::cout << "======>  Retrieve the second-highest GPA among students. \n";
+    std::cout << "======> Retrieve the second-highest GPA among students. \n";
     std::cout << "\n";
     sql.executeQuery7();
     std::cout << "===========================================================================================================================================\n";
@@ -319,7 +335,7 @@ void executeAllQueries(){
 
     std::cout << "=============================================================== SQL QUERY 8 ===============================================================\n";
     std::cout << "\n";
-    std::cout << "======>  Find the names of students who are also teaching assistants but have a GPA above 3.5. \n";
+    std::cout << "======> Find the names of students who are also teaching assistants but have a GPA above 3.5. \n";
     std::cout << "\n";
     sql.executeQuery8();
     std::cout << "===========================================================================================================================================\n";
@@ -327,9 +343,35 @@ void executeAllQueries(){
 
     std::cout << "=============================================================== SQL QUERY 9 ===============================================================\n";
     std::cout << "\n";
-    std::cout << "======>  List all students along with their enrolled courses, but only for those who enrolled after 2022. \n";
+    std::cout << "======> List all students along with their enrolled courses, but only for those who enrolled after 2022. \n";
     std::cout << "\n";
     sql.executeQuery9();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 10 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======> Retrieve the names and salaries of the top three highest-paid professors. \n";
+    std::cout << "\n";
+    sql.executeQuery10();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 11 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======> Insert a Junior Computer Science student named 'Alice Smith'd from Topeka, Kansas, 66610 with student number 888-88-8888 and\n";
+    std::cout << "======> GPA 3.85 into the student table. Show the result using SELECT * FROM Student. \n";
+    std::cout << "\n";
+    //sql.executeQuery11();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 12 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======> Student Bob Norbert has moved to Overland Park, Kansas. Update the StdCity and StdZip in the student table to reflect this change.\n";
+    std::cout << "======> Show the result using SELECT * FROM Student. \n";
+    std::cout << "\n";
+    //sql.executeQuery12();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
@@ -337,26 +379,6 @@ void executeAllQueries(){
 }
 
 int main(int argc, char** argv){
-    // External file not needed for this assignment.
-    /*
-    std::ifstream file;
-    if (argc > 1){  // If a filepath is specified (argv[1]).
-        file.open(argv[1]);     // Opens file specified by runtime args.
-        if (!file.is_open()){
-            std::cerr << "Error in 'main()': Could not open specified file.\n";
-            return 1;
-        }
-    } else {        // If no filepath is specified.
-        file.open("Assignment7_Test_File.txt");
-        if (!file.is_open()){
-            std::cerr << "Error in 'main()': Could not open default file 'Assignment7_Test_File.txt'.\n";
-            return 1;
-        }
-    }
-    */
-
     executeAllQueries();
-
-    // file.close();   // Closes the file after reading its data.
     return 0;
 }
