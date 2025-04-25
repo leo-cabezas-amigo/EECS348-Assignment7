@@ -50,7 +50,7 @@ class SQLPractice {
             stmt = con->createStatement();
             
             stmt->execute("USE " + this->username + ";");
-            res = stmt->executeQuery("SELECT * FROM Student;");
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
             printMatches(res);
             std::cout << "\n";
             return;
@@ -66,14 +66,14 @@ class SQLPractice {
             }
             std::cout << std::endl;
             for (int i = 1; i <= num_cols; ++i) {
-                std::cout << "---------\t";
+                std::cout << "-------------\t";
             }
             std::cout << std::endl;
 
             // Prints all columns for each matching row
             while (res->next()) {
                 for (int i = 1; i <= num_cols; ++i) {
-                    std::cout << res->getString(i) << "\t\t";
+                    std::cout << res->getString(i) << "\t";
                 }
                 std::cout << "\n";
             }
