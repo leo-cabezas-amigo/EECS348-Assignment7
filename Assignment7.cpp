@@ -18,10 +18,10 @@ Sources used    =
 */
 
 #include <iostream> // Basic C++ I/O library.
-#include <fstream>  // Implements file streams.
 #include <string>   // Implements std::string.
-#include <iomanip>
+#include <iomanip>  // To format table outputs with std::setw().
 
+// MySQL C++ libraries
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
@@ -256,7 +256,7 @@ class SQLPractice {
             // Raw string literal for a multi-line SQL query
             std::string query1 = R"(
                 INSERT INTO Student (StdNo, StdFirstName, StdLastName, StdCity, StdState, StdZip, StdMajor, StdClass, StdGPA)
-                VALUES ('888-88-8888', 'Alice', 'Smith', 'Topeka', 'KS', '66610', 'CS', 'JR', 3.85);
+                VALUES ('888-88-8888', 'ALICE', 'SMITH', 'TOPEKA', 'KS', '66610', 'CS', 'JR', 3.85);
             )";
             std::string query2 = "SELECT * FROM Student;";
             
@@ -265,7 +265,25 @@ class SQLPractice {
             printMatches(res);
             std::cout << "\n";
             return;
-        }  
+        }
+
+        void executeQuery12() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query1 = R"(
+                UPDATE Student
+                SET StdCity = 'OVERLAND PARK', StdZip = '66204'
+                WHERE StdFirstName = 'BOB', StdLastName = 'NORBERT';
+            )";
+            std::string query2 = "SELECT * FROM Student;";
+            
+            this->stmt->execute(query1);
+            res = this->stmt->executeQuery(query2);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
         
     private:
         std::string ip;
@@ -388,7 +406,7 @@ void executeAllQueries(){
     std::cout << "======> Student Bob Norbert has moved to Overland Park, Kansas. Update the StdCity and StdZip in the student table to reflect this change.\n";
     std::cout << "======> Show the result using SELECT * FROM Student. \n";
     std::cout << "\n";
-    //sql.executeQuery12();
+    sql.executeQuery12();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
