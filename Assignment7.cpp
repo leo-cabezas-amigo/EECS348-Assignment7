@@ -66,101 +66,14 @@ class SQLPractice {
             }
         }
 
-        void executeQuery1(sql::Statement* stmt){
+        void executeQuery1(){
             sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            res = this->stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
             printMatches(res);
             std::cout << "\n";
             return;
         }
 
-        void executeQuery2(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery3(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery4(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery5(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery6(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery7(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery8(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery9(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery10(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery11(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
-
-        void executeQuery12(sql::Statement* stmt){
-            sql::ResultSet* res;    // Stores the query results.
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
-            return;
-        }
 
     private:
         std::string ip;
@@ -190,7 +103,7 @@ void executeAllQueries(){
     
     std::cout << "================ SQL QUERY 1 ================\n";
     std::cout << "---> Retrieve all students majoring in 'IS'.\n";
-    sql.executeQuery1(sql.stmt);
+    sql.executeQuery1();
     std::cout << "\n";
 
     return;
