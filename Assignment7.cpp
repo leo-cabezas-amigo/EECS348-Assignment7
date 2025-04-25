@@ -22,6 +22,7 @@ Sources used    =
 //#include <sstream>  // Implements string streams.
 #include <string>   // Implements std::string.
 //#include <vector>   // Implements std::vector.
+#include <iomanip>
 
 #include <mysql_driver.h>
 #include <mysql_connection.h>
@@ -56,29 +57,29 @@ class SQLPractice {
             return;
         }
 
-        void printMatches(sql::ResultSet* res){
+        void printMatches(sql::ResultSet* res) {
             sql::ResultSetMetaData* metadata = res->getMetaData();
             int num_cols = metadata->getColumnCount();
 
-            // Prints column headers
+            // Print column headers
             for (int i = 1; i <= num_cols; ++i) {
-                std::cout << metadata->getColumnLabel(i) << "\t";
-            }
-            std::cout << std::endl;
-            for (int i = 1; i <= num_cols; ++i) {
-                std::cout << "-------------\t";
+                std::cout << std::setw(15) << std::left << metadata->getColumnLabel(i);
             }
             std::cout << std::endl;
 
-            // Prints all columns for each matching row
+            // Print separator line
+            for (int i = 1; i <= num_cols; ++i) {
+                std::cout << std::setw(15) << std::left << std::string(15, '-');
+            }
+            std::cout << std::endl;
+
+            // Print all rows
             while (res->next()) {
                 for (int i = 1; i <= num_cols; ++i) {
-                    std::cout << res->getString(i) << "\t";
+                    std::cout << std::setw(15) << std::left << res->getString(i);
                 }
                 std::cout << "\n";
             }
-
-            return;
         }
 
     private:
