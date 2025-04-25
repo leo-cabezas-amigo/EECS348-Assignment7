@@ -186,7 +186,7 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT MAX(StdGPA) AS 2ndHighestGPA
+                SELECT StdNo, StdFirstName, StdLastName, MAX(StdGPA) AS 2ndHighestGPA
                 FROM Student
                 WHERE StdGPA < (SELECT MAX(StdGPA) FROM Student);
             )";
@@ -202,7 +202,7 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT s.StdFirstName, s.StdLastName
+                SELECT s.StdNo, s.StdFirstName, s.StdLastName, StdGPA
                 FROM Student s
                 JOIN Faculty f ON s.StdNo = f.FacNo
                 WHERE f.FacRank = 'ASST' AND s.StdGPA > 3.5;
