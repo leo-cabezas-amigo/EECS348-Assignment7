@@ -112,6 +112,43 @@ class SQLPractice {
             return;
         }
 
+        void executeQuery3() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT FacNo, FacFirstName, FacLastName, FacDept, FacRank, FacHireDate
+                FROM Faculty
+                WHERE FacDept = 'Physics' 
+                AND TIMESTAMPDIFF(YEAR, FacHireDate, CURDATE()) > 5;
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery4() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT StdMajor, COUNT(*) AS TotalStudents
+                FROM Student
+                GROUP BY StdMajor
+                HAVING COUNT(*) > 50;
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+
+        
+
     private:
         std::string ip;
         std::string username;
@@ -155,11 +192,19 @@ void executeAllQueries(){
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
-    std::cout << "=============================================================== SQL QUERY 2 ===============================================================\n";
+    std::cout << "=============================================================== SQL QUERY 3 ===============================================================\n";
     std::cout << "\n";
     std::cout << "======> List all professors who have been teaching for more than 5 years in the 'Physics' department.\n";
     std::cout << "\n";
     sql.executeQuery3();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 4 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======> Retrieve the total number of students enrolled in each department, but only for departments with more than 50 students.\n";
+    std::cout << "\n";
+    sql.executeQuery4();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
