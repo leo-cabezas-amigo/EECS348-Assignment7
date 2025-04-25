@@ -68,21 +68,28 @@ class SQLPractice {
 
         void executeQuery1(){
             sql::ResultSet* res;    // Stores the query results.
-            res = this->stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+
+            std::string query = "SELECT * FROM Student WHERE StdMajor = 'IS';";
+
+            res = this->stmt->executeQuery(query);
             printMatches(res);
             std::cout << "\n";
             return;
         }
 
-        void executeQuery2(){
-            sql::ResultSet* res;    // Stores the query results.
-            res = this->stmt->executeQuery(
-                "SELECT *
+        void executeQuery2() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
                 FROM Student s
                 JOIN Enrollment e ON s.StdNo = e.StdNo
                 GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
-                HAVING COUNT(DISTINCT e.OfferNo) > 2;"
-            );
+                HAVING COUNT(DISTINCT e.OfferNo) > 2;
+            )";
+            
+            res = this->stmt->executeQuery(query);
             printMatches(res);
             std::cout << "\n";
             return;
