@@ -274,7 +274,7 @@ class SQLPractice {
             std::string query1 = R"(
                 UPDATE Student
                 SET StdCity = 'OVERLAND PARK', StdZip = '66204'
-                WHERE StdFirstName = 'BOB', StdLastName = 'NORBERT';
+                WHERE StdFirstName = 'BOB' AND StdLastName = 'NORBERT';
             )";
             std::string query2 = "SELECT * FROM Student;";
             
