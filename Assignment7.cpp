@@ -219,11 +219,12 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT s.StdFirstName, s.StdLastName, o.CourseNo, o.OffTerm, o.OffYear
+                SELECT s.StdNo, s.StdFirstName, s.StdLastName, o.CourseNo, o.OffTerm, o.OffYear
                 FROM Student s
                 JOIN Enrollment e ON s.StdNo = e.StdNo
                 JOIN Offering o ON e.OfferNo = o.OfferNo
-                WHERE o.OffYear > 2019;
+                WHERE o.OffYear > 2019
+                ORDER BY s.StdNo;
             )";
             
             res = this->stmt->executeQuery(query);
