@@ -62,7 +62,7 @@ class SQLPractice {
 
             // Prints column headers
             for (int i = 1; i <= num_cols; ++i) {
-                std::cout << metadata->getColumnLabel(i) << "\t\t";
+                std::cout << metadata->getColumnLabel(i) << "\t";
             }
             std::cout << std::endl;
             for (int i = 1; i <= num_cols; ++i) {
