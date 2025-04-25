@@ -82,7 +82,7 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT *
+                SELECT s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
                 FROM Student s
                 JOIN Enrollment e ON s.StdNo = e.StdNo
                 GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
@@ -100,11 +100,7 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT SELECT s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
-                FROM Student s
-                JOIN Enrollment e ON s.StdNo = e.StdNo
-                GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
-                HAVING COUNT(DISTINCT e.OfferNo) > 2;
+                
             )";
             
             res = this->stmt->executeQuery(query);
