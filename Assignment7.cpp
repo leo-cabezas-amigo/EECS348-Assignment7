@@ -77,11 +77,11 @@ class SQLPractice {
         void executeQuery2(){
             sql::ResultSet* res;    // Stores the query results.
             res = this->stmt->executeQuery(
-                "SELECT *" + 
-                "FROM Student s" +
-                "JOIN Enrollment e ON s.StdNo = e.StdNo" +
-                "GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor" +
-                "HAVING COUNT(DISTINCT e.OfferNo) > 2;"
+                "SELECT *
+                FROM Student s
+                JOIN Enrollment e ON s.StdNo = e.StdNo
+                GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
+                HAVING COUNT(DISTINCT e.OfferNo) > 2;"
             );
             printMatches(res);
             std::cout << "\n";
