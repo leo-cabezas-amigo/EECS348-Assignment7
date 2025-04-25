@@ -137,7 +137,7 @@ class SQLPractice {
                 JOIN Offering o ON c.CourseNo = o.CourseNo
                 JOIN Faculty f ON o.FacNo = f.FacNo
                 WHERE c.CrsDesc LIKE '%Data%'
-                AND f.FacLastName = 'VINCE';
+                AND f.FacLastName = 'COLAN';
             )";
             
             res = this->stmt->executeQuery(query);
