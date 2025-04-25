@@ -50,7 +50,7 @@ class SQLPractice {
             stmt = con->createStatement();
             
             stmt->execute("USE " + this->username + ";");
-            res = stmt->execute("SELECT * FROM Student;");
+            res = stmt->executeQuery("SELECT * FROM Student;");
             printMatches(res);
             std::cout << "\n";
             return;
