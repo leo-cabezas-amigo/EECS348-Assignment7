@@ -36,24 +36,8 @@ class SQLPractice {
             this->ip = ip;
             this->username = username;
             this->password = password;
-            return;
-        }
 
-        void connectSQL(){
-            sql::mysql::MySQL_Driver* driver;
-            sql::Connection* con;               // To establish the connection.
-            sql::Statement* stmt;               // To execute an SQL statement.
-            sql::ResultSet* res;                // Stores the query results.
-            
-
-            driver = sql::mysql::get_mysql_driver_instance();
-            con = driver->connect(this->ip, this->username, this->password);
-            stmt = con->createStatement();
-            
-            stmt->execute("USE " + this->username + ";");
-            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
-            printMatches(res);
-            std::cout << "\n";
+            this->connectSQL();
             return;
         }
 
@@ -82,11 +66,135 @@ class SQLPractice {
             }
         }
 
+        void executeQuery1(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery2(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery3(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery4(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery5(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery6(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery7(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery8(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery9(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery10(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery11(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery12(sql::Statement* stmt){
+            sql::ResultSet* res;    // Stores the query results.
+            res = stmt->executeQuery("SELECT * FROM Student WHERE StdMajor = 'IS';");
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
     private:
         std::string ip;
         std::string username;
         std::string password;
+
+        sql::mysql::MySQL_Driver* driver;
+        sql::Connection* con;               // To establish the connection.
+        sql::Statement* stmt;               // To execute an SQL statement. 
+
+        void connectSQL(){
+            this->stmt driver = sql::mysql::get_mysql_driver_instance();
+            this->con = driver->connect(this->ip, this->username, this->password);
+            this->stmt = con->createStatement();
+            
+            this->stmt->execute("USE " + this->username + ";");
+            return;
+        }
 };
+
+void executeAllQueries(){
+    std::string ip = "mysql.eecs.ku.edu";
+    std::string username = "348s25_l859c248";
+    std::string password = "aRi3vu3t";
+    
+    SQLPractice sql(ip, username, password);
+    
+    std::cout << "================ SQL QUERY 1 ================\n";
+    std::cout << "---> Retrieve all students majoring in 'IS'.\n";
+    sql.executeQuery1(sql.stmt);
+    std::cout << "\n";
+
+    return;
+}
 
 int main(int argc, char** argv){
     /*
@@ -106,12 +214,7 @@ int main(int argc, char** argv){
     }
     */
 
-    std::string ip = "mysql.eecs.ku.edu";
-    std::string username = "348s25_l859c248";
-    std::string password = "aRi3vu3t";
-    
-    SQLPractice sql(ip, username, password);
-    sql.connectSQL();
+    executeAllQueries();
 
     // file.close();   // Closes the file after reading its data.
     return 0;
