@@ -238,13 +238,30 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT FacFirstName, FacLastName, FacSalary
+                SELECT FacNo, FacFirstName, FacLastName, FacSalary
                 FROM Faculty
                 ORDER BY FacSalary DESC
                 LIMIT 3;
             )";
             
             res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery11() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query1 = R"(
+                INSERT INTO Student (StdNo, StdFirstName, StdLastName, StdCity, StdState, StdZip, StdMajor, StdClass, StdGPA)
+                VALUES ('888-88-8888', 'Alice', 'Smith', 'Topeka', 'KS', '66610', 'CS', 'JR', 3.85);
+            )";
+            std::string query2 = "SELECT * FROM Student;";
+            
+            this->stmt->execute(query1);
+            res = this->stmt->executeQuery(query2);
             printMatches(res);
             std::cout << "\n";
             return;
@@ -362,7 +379,7 @@ void executeAllQueries(){
     std::cout << "======> Insert a Junior Computer Science student named 'Alice Smith'd from Topeka, Kansas, 66610 with student number 888-88-8888 and\n";
     std::cout << "======> GPA 3.85 into the student table. Show the result using SELECT * FROM Student. \n";
     std::cout << "\n";
-    //sql.executeQuery11();
+    sql.executeQuery11();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
