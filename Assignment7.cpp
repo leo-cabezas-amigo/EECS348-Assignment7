@@ -19,9 +19,7 @@ Sources used    =
 
 #include <iostream> // Basic C++ I/O library.
 #include <fstream>  // Implements file streams.
-//#include <sstream>  // Implements string streams.
 #include <string>   // Implements std::string.
-//#include <vector>   // Implements std::vector.
 #include <iomanip>
 
 #include <mysql_driver.h>
@@ -45,19 +43,19 @@ class SQLPractice {
             sql::ResultSetMetaData* metadata = res->getMetaData();
             int num_cols = metadata->getColumnCount();
 
-            // Print column headers
+            // Print column headers.
             for (int i = 1; i <= num_cols; ++i) {
                 std::cout << std::setw(15) << std::left << metadata->getColumnLabel(i);
             }
             std::cout << std::endl;
 
-            // Print separator line
+            // Print separator line.
             for (int i = 1; i <= num_cols; ++i) {
                 std::cout << std::setw(15) << std::left << std::string(15, '-');
             }
             std::cout << std::endl;
 
-            // Print all rows
+            // Print all rows.
             while (res->next()) {
                 for (int i = 1; i <= num_cols; ++i) {
                     std::cout << std::setw(15) << std::left << res->getString(i);
@@ -127,6 +125,25 @@ class SQLPractice {
             printMatches(res);
             std::cout << "\n";
             return;
+        }
+
+        void executeQuery5() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT c.CourseNo, c.CrsDesc
+                FROM Course c
+                JOIN Offering o ON c.CourseNo = o.CourseNo
+                JOIN Faculty f ON o.FacNo = f.FacNo
+                WHERE c.CrsDesc LIKE '%Data%'
+                AND f.FacLastName = 'VINCE';
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
         }        
 
     private:
@@ -188,10 +205,19 @@ void executeAllQueries(){
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
+    std::cout << "=============================================================== SQL QUERY 5 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======>  Find the course names and IDs of courses that have 'Data' in their title and are taught by 'Dr. Johnson'. \n";
+    std::cout << "\n";
+    sql.executeQuery5();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
     return;
 }
 
 int main(int argc, char** argv){
+    // External file not needed for this assignment.
     /*
     std::ifstream file;
     if (argc > 1){  // If a filepath is specified (argv[1]).
