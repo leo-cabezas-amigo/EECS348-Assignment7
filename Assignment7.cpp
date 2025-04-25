@@ -257,6 +257,10 @@ class SQLPractice {
             std::string query1 = R"(
                 INSERT INTO Student (StdNo, StdFirstName, StdLastName, StdCity, StdState, StdZip, StdMajor, StdClass, StdGPA)
                 VALUES ('888-88-8888', 'ALICE', 'SMITH', 'TOPEKA', 'KS', '66610', 'CS', 'JR', 3.85);
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM Student
+                    WHERE StdNo = 888-88-8888
+                );
             )";
             std::string query2 = "SELECT * FROM Student;";
             
