@@ -137,14 +137,49 @@ class SQLPractice {
                 JOIN Offering o ON c.CourseNo = o.CourseNo
                 JOIN Faculty f ON o.FacNo = f.FacNo
                 WHERE c.CrsDesc LIKE '%Data%'
-                AND f.FacLastName = 'COLAN';
+                AND f.FacLastName = 'JOHNSON';
             )";
             
             res = this->stmt->executeQuery(query);
             printMatches(res);
             std::cout << "\n";
             return;
-        }        
+        }
+
+        void executeQuery6() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT s.StdNo, s.StdFirstName, s.StdLastName
+                FROM Student s
+                WHERE NOT EXISTS (
+                    SELECT 1
+                    FROM Enrollment e
+                    JOIN Offering o ON e.OfferNo = o.OfferNo
+                    WHERE e.StdNo = s.StdNo
+                    AND ((
+                            -- Check if the student enrolled in the current semester
+                            (MONTH(CURDATE()) IN (12, 1) AND o.OffTerm = 'WINTER' AND o.OffYear = YEAR(CURDATE()))  -- Winter
+                            OR (MONTH(CURDATE()) IN (2, 3, 4, 5) AND o.OffTerm = 'SPRING' AND o.OffYear = YEAR(CURDATE()))  -- Spring
+                            OR (MONTH(CURDATE()) IN (6, 7) AND o.OffTerm = 'SUMMER' AND o.OffYear = YEAR(CURDATE()))  -- Summer
+                            OR (MONTH(CURDATE()) IN (8, 9, 10, 11) AND o.OffTerm = 'FALL' AND o.OffYear = YEAR(CURDATE()))  -- Fall
+                        ) OR (
+                            -- Check if the student enrolled in the previous semester
+                            (MONTH(CURDATE()) IN (12, 1) AND o.OffTerm = 'FALL' AND o.OffYear = YEAR(CURDATE()) - 1)  -- Previous Fall
+                            OR (MONTH(CURDATE()) IN (2, 3, 4, 5) AND o.OffTerm = 'WINTER' AND o.OffYear = YEAR(CURDATE()))  -- Previous Winter
+                            OR (MONTH(CURDATE()) IN (6, 7) AND o.OffTerm = 'SPRING' AND o.OffYear = YEAR(CURDATE()))  -- Previous Spring
+                            OR (MONTH(CURDATE()) IN (8, 9, 10, 11) AND o.OffTerm = 'SUMMER' AND o.OffYear = YEAR(CURDATE()))  -- Previous Summer
+                        )
+                    )
+                );
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }       
 
     private:
         std::string ip;
