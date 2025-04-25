@@ -74,6 +74,19 @@ class SQLPractice {
             return;
         }
 
+        void executeQuery2(){
+            sql::ResultSet* res;    // Stores the query results.
+            res = this->stmt->executeQuery(
+                "SELECT *" + 
+                "FROM Student s" +
+                "JOIN Enrollment e ON s.StdNo = e.StdNo" +
+                "GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor" +
+                "HAVING COUNT(DISTINCT e.OfferNo) > 2;"
+            );
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
 
     private:
         std::string ip;
@@ -107,6 +120,14 @@ void executeAllQueries(){
     std::cout << "======> Retrieve all students majoring in 'IS'.\n";
     std::cout << "\n";
     sql.executeQuery1();
+    std::cout << "===========================================================================================================================================\n";
+    std::cout << "\n";
+
+    std::cout << "=============================================================== SQL QUERY 2 ===============================================================\n";
+    std::cout << "\n";
+    std::cout << "======> Find the names of students who have enrolled in more than two courses.\n";
+    std::cout << "\n";
+    sql.executeQuery2();
     std::cout << "===========================================================================================================================================\n";
     std::cout << "\n";
 
