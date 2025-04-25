@@ -101,8 +101,10 @@ void executeAllQueries(){
     
     SQLPractice sql(ip, username, password);
     
-    std::cout << "================ SQL QUERY 1 ================\n";
-    std::cout << "---> Retrieve all students majoring in 'IS'.\n";
+    std::cout << "================================================ SQL QUERY 1 ================================================\n";
+    std::cout << "-----------------------------------------------------\n";
+    std::cout << "======> Retrieve all students majoring in 'IS'.\n";
+    std::cout << "-----------------------------------------------------\n";
     sql.executeQuery1();
     std::cout << "\n";
 
