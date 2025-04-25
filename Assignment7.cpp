@@ -82,7 +82,25 @@ class SQLPractice {
             
             // Raw string literal for a multi-line SQL query
             std::string query = R"(
-                SELECT s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
+                SELECT *
+                FROM Student s
+                JOIN Enrollment e ON s.StdNo = e.StdNo
+                GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
+                HAVING COUNT(DISTINCT e.OfferNo) > 2;
+            )";
+            
+            res = this->stmt->executeQuery(query);
+            printMatches(res);
+            std::cout << "\n";
+            return;
+        }
+
+        void executeQuery3() {
+            sql::ResultSet* res;  // Stores the query results.
+            
+            // Raw string literal for a multi-line SQL query
+            std::string query = R"(
+                SELECT *
                 FROM Student s
                 JOIN Enrollment e ON s.StdNo = e.StdNo
                 GROUP BY s.StdNo, s.StdFirstName, s.StdLastName, s.StdMajor
